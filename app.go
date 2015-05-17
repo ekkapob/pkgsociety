@@ -1,9 +1,10 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"log"
 	"net/http"
-	"os"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -11,6 +12,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	var port = flag.String("port", ":8080", "Server's port.")
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+
+	log.Println("Starting web server on", *port)
+	if err := http.ListenAndServe(*port, nil); err != nil {
+		log.Fatal("ListenAndServe:", err)
+	}
 }
