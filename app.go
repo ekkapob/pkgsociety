@@ -1,7 +1,6 @@
 package main
 
 import (
-	// "flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -9,12 +8,11 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+	fmt.Fprintf(w, "Hello...")
 }
 
 func main() {
 	port := os.Getenv("PORT")
-	//var port = flag.String("port", ":8080", "Server's port.")
 	http.HandleFunc("/", handler)
 
 	log.Println("Starting web server on", port)
